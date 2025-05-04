@@ -1,19 +1,18 @@
 VERSION= $(shell cat ./VERSION)
 GO?= go
-NPM?= npm
+NPM?= pnpm
 
 .PHONY: build assets deps lint prebaked-build test
 
 all: build
 
 deps:
-	$(NPM) ci
+	$(NPM) i
 	$(GO) mod download
 
 assets: PATH:=$(PWD)/node_modules/.bin:$(PATH)
 assets: deps
 	$(GO) generate ./...
-	./web/build.sh
 
 build: assets
 	$(GO) build -o ./var/sisyphus ./cmd/sisyphus
