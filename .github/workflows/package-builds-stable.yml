@@ -60,7 +60,7 @@ jobs:
 
     - name: install node deps
       run: |
-        npm ci
+        pnpm i
 
     - name: Build Packages
       run: |

@@ -54,8 +54,8 @@ jobs:
       - name: Build and push
         id: build
         run: |
-          npm ci
-          npm run container
+          pnpm i
+          pnpm container
         env:
           PULL_REQUEST_ID: ${{ github.event.number }}
           DOCKER_REPO: ghcr.io/mooncellwiki/sisyphus
