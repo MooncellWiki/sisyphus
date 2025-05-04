@@ -1,0 +1,28 @@
+{
+  "name": "@mooncellwiki/sisyphus",
+  "version": "0.0.0",
+  "packageManager": "pnpm@10.10.0",
+  "type": "module",
+  "scripts": {
+    "test": "pnpm run assets && go test ./...",
+    "test:integration": "pnpm run assets && go test -v ./internal/test",
+    "assets": "go generate ./... && pnpm --filter=frontend run build",
+    "build": "pnpm run assets && go build -o ./var/sisyphus ./cmd/sisyphus",
+    "dev": "pnpm run assets && go run ./cmd/sisyphus --use-remote-address",
+    "lint": "eslint packages/**",
+    "lint:fix": "eslint --fix packages/**",
+    "container": "pnpm run assets && go run ./cmd/containerbuild",
+    "package": "yeet"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.25.1",
+    "@unocss/eslint-config": "66.1.0-beta.12",
+    "eslint": "^9.25.1",
+    "eslint-config-prettier": "^10.1.2",
+    "eslint-plugin-import-x": "^4.11.0",
+    "eslint-plugin-prettier": "^5.2.6",
+    "eslint-plugin-unicorn": "^58.0.0",
+    "globals": "^16.0.0",
+    "typescript-eslint": "^8.31.0"
+  }
+}

@@ -1,0 +1,13 @@
+defaultBaseImage: cgr.dev/chainguard/static
+defaultPlatforms:
+  - linux/arm64
+  - linux/amd64
+  - linux/arm/v7
+
+builds:
+  - id: sisyphus
+    main: ./cmd/sisyphus
+    ldflags:
+      - -s -w
+      - -extldflags "-static"
+      - -X github.com/MooncellWiki/sisyphus.Version={{.Env.VERSION}}

@@ -1,0 +1,34 @@
+#!/bin/sh
+
+# PROVIDE: sisyphus
+# REQUIRE: NETWORKING
+# KEYWORD: shutdown
+
+. /etc/rc.subr
+
+name=sisyphus
+rcvar=sisyphus_enable
+
+load_rc_config ${name}
+
+: ${sisyphus_enable="NO"}
+: ${sisyphus_user="sisyphus"}
+: ${sisyphus_bin="/usr/local/bin/sisyphus"}
+: ${sisyphus_environment_file="/etc/sisyphus.env"}
+
+command=/usr/sbin/daemon
+procname=${sisyphus_bin}
+pidfile=/var/run/sisyphus.pid
+logfile=/var/log/sisyphus.log
+command_args="-c -f -p ${pidfile} -o ${logfile} ${procname}"
+start_precmd=sisyphus_precmd
+
+sisyphus_precmd () {
+        export $(xargs < ${sisyphus_environment_file})
+        if [ ! -f ${logfile} ]; then
+                install -o sisyphus /dev/null ${logfile}
+        fi
+        install -o sisyphus /dev/null ${pidfile}
+}
+
+run_rc_command "$1"

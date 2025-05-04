@@ -1,0 +1,4 @@
+bots:
+- name: cloudflare-workers
+  expression: '"Cf-Worker" in headers'
+  action: DENY

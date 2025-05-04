@@ -1,0 +1,18 @@
+[Unit]
+Description="sisyphus HTTP defense proxy (instance %i)"
+
+[Service]
+ExecStart=/usr/bin/sisyphus
+Restart=always
+RestartSec=30s
+EnvironmentFile=/etc/sisyphus/%i.env
+LimitNOFILE=infinity
+DynamicUser=yes
+CacheDirectory=sisyphus/%i
+CacheDirectoryMode=0755
+StateDirectory=sisyphus/%i
+StateDirectoryMode=0755
+ReadWritePaths=/run
+
+[Install]
+WantedBy=multi-user.target
