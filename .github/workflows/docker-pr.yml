@@ -21,6 +21,9 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
+      - name: Setup Node Environment
+        uses: ./.github/actions/setup-node
+
       - name: Set up Homebrew
         uses: Homebrew/actions/setup-homebrew@master
 
@@ -53,9 +56,7 @@ jobs:
 
       - name: Build and push
         id: build
-        run: |
-          pnpm i
-          pnpm container
+        run: pnpm container
         env:
           PULL_REQUEST_ID: ${{ github.event.number }}
           DOCKER_REPO: ghcr.io/mooncellwiki/sisyphus
