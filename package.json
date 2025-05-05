@@ -9,6 +9,7 @@
     "assets": "go generate ./... && pnpm --filter=frontend run build",
     "build": "pnpm run assets && go build -o ./var/sisyphus ./cmd/sisyphus",
     "dev": "pnpm run assets && go run ./cmd/sisyphus --use-remote-address",
+    "dev:frontend": "pnpm --filter=frontend run dev",
     "lint": "eslint packages/**",
     "lint:fix": "eslint --fix packages/**",
     "container": "pnpm run assets && go run ./cmd/containerbuild",
