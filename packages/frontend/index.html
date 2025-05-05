@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{.Title}}</title>
+    {{.Head}}
+    <script type="module" src="/src/main.ts"></script>
+  </head>
+
+  <body
+    id="top"
+    class="min-h-screen flex items-center justify-center text-gray-700 dark:text-gray-200 relative"
+  >
+    <main
+      class="w-full max-w-2xl p-8 space-y-8 rounded-2xl shadow-xl bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg transition-colors"
+    >
+      <div class="text-center">
+        <h1
+          class="text-4xl font-extrabold text-black dark:text-white tracking-tight mb-2"
+          id="title"
+        >
+          {{.Title}}
+        </h1>
+      </div>
+      <div class="text-base text-gray-800 dark:text-gray-200 leading-relaxed">
+        {{.Body}}
+      </div>
+      <footer
+        class="text-sm text-gray-500 dark:text-gray-400 text-center mt-8 border-t border-gray-200 dark:border-gray-700 pt-4"
+      >
+        <p>
+          Protected by
+          <a
+            class="text-blue-600 dark:text-blue-400 underline underline-offset-2 hover:text-blue-800 dark:hover:text-blue-200 transition"
+            href="https://github.com/MooncellWiki/sisyphus"
+            >Sisyphus</a
+          >
+          from
+          <a
+            class="text-blue-600 dark:text-blue-400 underline underline-offset-2 hover:text-blue-800 dark:hover:text-blue-200 transition"
+            href="https://mooncell.wiki"
+            >Mooncell Wiki</a
+          >. Made with ❤️ in 🇨🇳.
+        </p>
+      </footer>
+    </main>
+  </body>
+</html>
