@@ -7,11 +7,11 @@ import (
 )
 
 func Base(title string, body templ.Component) templ.Component {
-	return base(title, body, nil, nil)
+	return base(title, nil, nil)
 }
 
 func BaseWithChallengeAndOGTags(title string, body templ.Component, challenge string, rules *config.ChallengeRules, ogTags map[string]string) (templ.Component, error) {
-	return base(title, body, struct {
+	return base(title, struct {
 		Challenge string                 `json:"challenge"`
 		Rules     *config.ChallengeRules `json:"rules"`
 	}{
@@ -29,5 +29,5 @@ func ErrorPage(msg string, mail string) templ.Component {
 }
 
 func Bench() templ.Component {
-	return bench()
+	return nil
 }

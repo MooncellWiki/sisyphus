@@ -16,9 +16,8 @@ function parseData<T>(selector: string): T | null {
   }
 }
 
-const app = createApp(App, {
+createApp(App, {
   title: document.querySelector("title")?.textContent,
   basePrefix: parseData("#sisyphus_base_prefix"),
   challengeData: parseData("#sisyphus_challenge"),
-});
-app.mount("#app");
+}).mount("#app");

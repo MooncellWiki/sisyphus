@@ -73,18 +73,12 @@ func (s *Server) RenderIndex(w http.ResponseWriter, r *http.Request, rule *polic
 	handler.ServeHTTP(w, r)
 }
 
-func (s *Server) RenderBench(w http.ResponseWriter, r *http.Request) {
-	templ.Handler(
-		web.Base("Benchmarking sisyphus!", web.Bench()),
-	).ServeHTTP(w, r)
-}
-
 func (s *Server) respondWithError(w http.ResponseWriter, r *http.Request, message string) {
 	s.respondWithStatus(w, r, message, http.StatusInternalServerError)
 }
 
 func (s *Server) respondWithStatus(w http.ResponseWriter, r *http.Request, msg string, status int) {
-	templ.Handler(web.Base("Oh noes!", web.ErrorPage(msg, s.opts.WebmasterEmail)), templ.WithStatus(status)).ServeHTTP(w, r)
+	templ.Handler(web.ErrorPage(msg, s.opts.WebmasterEmail), templ.WithStatus(status)).ServeHTTP(w, r)
 }
 
 func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
@@ -110,9 +104,7 @@ func (s *Server) ServeHTTPNext(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		templ.Handler(
-			web.Base("You are not a bot!", web.StaticHappy()),
-		).ServeHTTP(w, r)
+		templ.Handler(web.StaticHappy()).ServeHTTP(w, r)
 	} else {
 		s.next.ServeHTTP(w, r)
 	}

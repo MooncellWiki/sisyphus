@@ -174,10 +174,6 @@ func (s *Server) checkRules(w http.ResponseWriter, r *http.Request, cr policy.Ch
 		return true
 	case config.RuleChallenge:
 		lg.Debug("challenge requested")
-	case config.RuleBenchmark:
-		lg.Debug("serving benchmark page")
-		s.RenderBench(w, r)
-		return true
 	default:
 		s.ClearCookie(w)
 		slog.Error("CONFIG ERROR: unknown rule", "rule", cr.Rule)
