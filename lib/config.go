@@ -11,7 +11,7 @@ import (
 	"strings"
 	"time"
 
-	sisyphus "github.com/MooncellWiki/sisyphus"
+	"github.com/MooncellWiki/sisyphus"
 	"github.com/MooncellWiki/sisyphus/data"
 	"github.com/MooncellWiki/sisyphus/decaymap"
 	"github.com/MooncellWiki/sisyphus/internal"

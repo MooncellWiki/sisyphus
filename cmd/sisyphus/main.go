@@ -26,10 +26,10 @@ import (
 	"syscall"
 	"time"
 
-	sisyphus "github.com/MooncellWiki/sisyphus"
+	"github.com/MooncellWiki/sisyphus"
 	"github.com/MooncellWiki/sisyphus/data"
 	"github.com/MooncellWiki/sisyphus/internal"
-	libsisyphus "github.com/MooncellWiki/sisyphus/lib"
+	"github.com/MooncellWiki/sisyphus/lib"
 	botPolicy "github.com/MooncellWiki/sisyphus/lib/policy"
 	"github.com/MooncellWiki/sisyphus/lib/policy/config"
 	"github.com/MooncellWiki/sisyphus/web"
@@ -152,7 +152,7 @@ func makeReverseProxy(target string) (http.Handler, error) {
 			return dialer.DialContext(ctx, "unix", addr)
 		}
 		// tell transport how to handle the unix url scheme
-		transport.RegisterProtocol("unix", libsisyphus.UnixRoundTripper{Transport: transport})
+		transport.RegisterProtocol("unix", lib.UnixRoundTripper{Transport: transport})
 	}
 
 	rp := httputil.NewSingleHostReverseProxy(targetUri)
@@ -161,7 +161,7 @@ func makeReverseProxy(target string) (http.Handler, error) {
 	return rp, nil
 }
 
-func startDecayMapCleanup(ctx context.Context, s *libsisyphus.Server) {
+func startDecayMapCleanup(ctx context.Context, s *lib.Server) {
 	ticker := time.NewTicker(1 * time.Hour)
 	defer ticker.Stop()
 
@@ -202,7 +202,7 @@ func main() {
 		}
 	}
 
-	policy, err := libsisyphus.LoadPoliciesOrDefault(*policyFname, *challengeDifficulty)
+	policy, err := lib.LoadPoliciesOrDefault(*policyFname, *challengeDifficulty)
 	if err != nil {
 		log.Fatalf("can't parse policy file: %v", err)
 	}
@@ -272,7 +272,7 @@ func main() {
 		slog.Warn("REDIRECT_DOMAINS is not set, sisyphus will only redirect to the same domain a request is coming from, see https://sisyphus.techaro.lol/docs/admin/configuration/redirect-domains")
 	}
 
-	s, err := libsisyphus.New(libsisyphus.Options{
+	s, err := lib.New(lib.Options{
 		BasePrefix:           *basePrefix,
 		Next:                 rp,
 		Policy:               policy,
@@ -289,7 +289,7 @@ func main() {
 		OGCacheConsidersHost: *ogCacheConsiderHost,
 	})
 	if err != nil {
-		log.Fatalf("can't construct libsisyphus.Server: %v", err)
+		log.Fatalf("can't construct lib.Server: %v", err)
 	}
 
 	wg := new(sync.WaitGroup)

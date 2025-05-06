@@ -9,7 +9,7 @@ import (
 	"net/netip"
 	"strings"
 
-	sisyphus "github.com/MooncellWiki/sisyphus"
+	"github.com/MooncellWiki/sisyphus"
 	"github.com/sebest/xff"
 )
 

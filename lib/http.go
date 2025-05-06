@@ -5,7 +5,7 @@ import (
 	"slices"
 	"time"
 
-	sisyphus "github.com/MooncellWiki/sisyphus"
+	"github.com/MooncellWiki/sisyphus"
 	"github.com/MooncellWiki/sisyphus/internal"
 	"github.com/MooncellWiki/sisyphus/lib/policy"
 	"github.com/MooncellWiki/sisyphus/web"

@@ -5,7 +5,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	sisyphus "github.com/MooncellWiki/sisyphus"
+	"github.com/MooncellWiki/sisyphus"
 	"github.com/MooncellWiki/sisyphus/data"
 )
 
