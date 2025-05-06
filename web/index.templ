@@ -6,24 +6,7 @@ import (
 	"html/template"
 )
 
-var indexJSPath = func() string {
-	entries, err := Static.ReadDir("static/assets")
-	if err != nil {
-		return ""
-	}
-	for _, entry := range entries {
-		if entry.IsDir() {
-			continue
-		}
-		name := entry.Name()
-		if name[:5] == "index" && name[len(name)-3:] == ".js" {
-			return sisyphus.StaticPath + "static/assets/" + name
-		}
-	}
-	return ""
-}()
-
-var goTemplate = template.Must(template.New("example").Parse(func() string {
+var goTemplate = template.Must(template.New("index").Parse(func() string {
 	data, err := Static.ReadFile("static/index.html")
 	if err != nil {
 		panic(err)
@@ -41,12 +24,11 @@ templ injected(challenge any) {
 
 templ base(title string, body templ.Component, challenge any, ogTags map[string]string) {
 	@templ.FromGoHTML(goTemplate, struct {
-		Title string
-		Head  template.HTML
-		Body  template.HTML
+		Title  string
+		Inject template.HTML
 	}{
 		Title: title,
-		Head: func() template.HTML {
+		Inject: func() template.HTML {
 			var head = injected(challenge)
 			result, err := templ.ToGoHTML(context.Background(), head)
 			if err != nil {
@@ -54,65 +36,7 @@ templ base(title string, body templ.Component, challenge any, ogTags map[string]
 			}
 			return result
 		}(),
-		Body: func() template.HTML {
-			result, err := templ.ToGoHTML(context.Background(), body)
-			if err != nil {
-				panic(err)
-			}
-			return result
-		}(),
 	})
-}
-
-templ index() {
-	<div class="centered-div">
-		<p id="status">Loading...</p>
-		<script async type="module" src={ sisyphus.BasePrefix + indexJSPath + "?cacheBuster=" + sisyphus.Version }></script>
-		<div id="progress" role="progressbar" aria-labelledby="status">
-			<div class="bar-inner"></div>
-		</div>
-		<details class="prose">
-			<summary>Why am I seeing this?</summary>
-			<p>
-				You are seeing this because the administrator of this website has set up <a
-	href="https://github.com/MooncellWiki/sisyphus"
->sisyphus</a> to protect the server against the scourge of
-				<a href="https://thelibre.news/foss-infrastructure-is-under-attack-by-ai-companies/">
-					AI companies
-					aggressively scraping websites
-				</a>. This can and does cause downtime for the websites, which makes their
-				resources inaccessible for everyone.
-			</p>
-			<p>
-				sisyphus is a compromise. sisyphus uses a <a
-	href="https://sisyphus.techaro.lol/docs/design/why-proof-of-work"
->Proof-of-Work</a>
-				scheme in the vein of <a href="https://en.wikipedia.org/wiki/Hashcash">Hashcash</a>, a proposed
-				proof-of-work scheme for reducing email spam. The idea is that at individual scales the additional load is
-				ignorable, but at mass scraper levels it adds up and makes scraping much more expensive.
-			</p>
-			<p>
-				Ultimately, this is a hack whose real purpose is to give a "good enough" placeholder solution so that more
-				time can be spent on fingerprinting and identifying headless browsers (EG: via how they do font rendering)
-				so that the challenge proof of work page doesn't need to be presented to users that are much more likely to
-				be legitimate.
-			</p>
-			<p>
-				Please note that sisyphus requires the use of modern JavaScript features that plugins like <a
-	href="https://jshelter.org/"
->JShelter</a> will disable. Please disable JShelter or other such
-				plugins for this domain.
-			</p>
-		</details>
-		<noscript>
-			<p>
-				Sadly, you must enable JavaScript to get past this challenge. This is required because AI companies have
-				changed
-				the social contract around how website hosting works. A no-JS solution is a work-in-progress.
-			</p>
-		</noscript>
-		<div id="testarea"></div>
-	</div>
 }
 
 templ errorPage(message string, mail string) {

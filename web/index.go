@@ -21,7 +21,7 @@ func BaseWithChallengeAndOGTags(title string, body templ.Component, challenge st
 }
 
 func Index() templ.Component {
-	return index()
+	return nil
 }
 
 func ErrorPage(msg string, mail string) templ.Component {

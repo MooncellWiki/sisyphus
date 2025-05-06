@@ -9,92 +9,14 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-:root {
-  --c-bg: #fff;
-  --c-scrollbar: #eee;
-  --c-scrollbar-hover: #bbb;
+body {
+  @apply m-0;
 }
 
-html {
-  background: linear-gradient(135deg, #f8fafc 0%, #e0e7ef 100%);
-  overflow-x: hidden;
-  overflow-y: scroll;
-}
+#app {
+  @apply min-h-screen;
 
-@media (prefers-color-scheme: dark) {
-  html {
-    background: linear-gradient(135deg, #18181b 0%, #23272f 100%);
-    --c-bg: #050505;
-    --c-scrollbar: #111;
-    --c-scrollbar-hover: #222;
+  a {
+    @apply no-underline;
   }
-
-  html #progress {
-    background: #222;
-  }
-
-  html #progress .bar-inner {
-    background: linear-gradient(90deg, #818cf8 0%, #3730a3 100%);
-  }
-
-  html .prose {
-    --fg-light: #888;
-    --fg: #bbb;
-    --fg-deep: #ddd;
-    --fg-deeper: #fff;
-  }
-}
-
-#progress {
-  width: 100%;
-  height: 8px;
-  background: #e5e7eb;
-  border-radius: 4px;
-  overflow: hidden;
-  margin: 1.5rem 0;
-  box-shadow: 0 1px 4px #0001;
-  position: relative;
-  transition: background 0.3s;
-}
-
-#progress .bar-inner {
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg, #60a5fa 0%, #2563eb 100%);
-  border-radius: 4px;
-  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s;
-}
-
-::selection {
-  background: #8884;
-}
-
-* {
-  scrollbar-color: var(--c-scrollbar) var(--c-bg);
-}
-
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar:horizontal {
-  height: 6px;
-}
-::-webkit-scrollbar-track,
-::-webkit-scrollbar-corner {
-  background: var(--c-bg);
-  border-radius: 10px;
-}
-::-webkit-scrollbar-thumb {
-  background: var(--c-scrollbar);
-  border-radius: 10px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--c-scrollbar-hover);
-}
-
-h2 + p > em:first-child {
-  opacity: 0.5;
-  display: block;
-  margin-top: -20px;
-  font-size: 0.9em;
 }
