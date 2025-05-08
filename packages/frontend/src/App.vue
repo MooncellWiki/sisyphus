@@ -281,7 +281,7 @@ onMounted(() => {
             Protected by
             <NA href="https://github.com/MooncellWiki/sisyphus">Sisyphus</NA>
             from
-            <NA href="https://mooncell.wiki">Mooncell Wiki</NA>.
+            <NA href="https://project.mooncell.wiki">Mooncell Wiki</NA>.
           </NText>
         </div>
       </NLayoutFooter>
