@@ -94,7 +94,7 @@ func (s *Server) ServeHTTPNext(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-        var notAllowedDomain = len(urlParsed.Host) > 0 && len(s.opts.RedirectDomains) != 0 && !slices.Contains(s.opts.RedirectDomains, urlParsed.Host);
+		var notAllowedDomain = len(urlParsed.Host) > 0 && len(s.opts.RedirectDomains) != 0 && !slices.Contains(s.opts.RedirectDomains, urlParsed.Host)
 		if notAllowedDomain || (len(s.opts.RedirectDomains) == 0 && urlParsed.Host != r.URL.Host) {
 			s.respondWithStatus(w, r, "Redirect domain not allowed", http.StatusBadRequest)
 			return
