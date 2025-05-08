@@ -8,13 +8,7 @@
 
 ## Overview
 
-sisyphus [weighs the soul of your connection](https://en.wikipedia.org/wiki/Weighing_of_souls) using a proof-of-work challenge in order to protect upstream resources from scraper bots.
-
-This program is designed to help protect the small internet from the endless storm of requests that flood in from AI companies. sisyphus is as lightweight as possible to ensure that everyone can afford to protect the communities closest to them.
-
-sisyphus is a bit of a nuclear response. This will result in your website being blocked from smaller scrapers and may inhibit "good bots" like the Internet Archive. You can configure bot policy definitions to explicitly allowlist them and we are working on a curated set of "known good" bots to allow for a compromise between discoverability and uptime.
-
-In most cases, you should not need this and can probably get by using Cloudflare to protect a given origin. However, for circumstances where you can't or won't use Cloudflare, sisyphus is there for you.
+Forked from [TecharoHQ/anubis](https://github.com/TecharoHQ/anubis) for Mooncell Wiki customizations
 
 ## Support
 
