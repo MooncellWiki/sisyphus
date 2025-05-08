@@ -235,8 +235,7 @@ onMounted(() => {
           </NP>
           <NP>
             sisyphus is a compromise. sisyphus uses a
-            <NA
-              href="https://sisyphus.techaro.lol/docs/design/why-proof-of-work"
+            <NA href="https://anubis.techaro.lol/docs/design/why-proof-of-work"
               >Proof-of-Work</NA
             >
             scheme in the vein of

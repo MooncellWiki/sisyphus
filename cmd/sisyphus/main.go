@@ -255,7 +255,7 @@ func main() {
 			log.Fatalf("failed to generate ed25519 key: %v", err)
 		}
 
-		slog.Warn("generating random key, sisyphus will have strange behavior when multiple instances are behind the same load balancer target, for more information: see https://sisyphus.techaro.lol/docs/admin/installation#key-generation")
+		slog.Warn("generating random key, sisyphus will have strange behavior when multiple instances are behind the same load balancer target, for more information: see https://anubis.techaro.lol/docs/admin/installation#key-generation")
 	}
 
 	var redirectDomainsList []string
@@ -269,7 +269,7 @@ func main() {
 			redirectDomainsList = append(redirectDomainsList, strings.TrimSpace(domain))
 		}
 	} else {
-		slog.Warn("REDIRECT_DOMAINS is not set, sisyphus will only redirect to the same domain a request is coming from, see https://sisyphus.techaro.lol/docs/admin/configuration/redirect-domains")
+		slog.Warn("REDIRECT_DOMAINS is not set, sisyphus will only redirect to the same domain a request is coming from, see https://anubis.techaro.lol/docs/admin/configuration/redirect-domains")
 	}
 
 	s, err := lib.New(lib.Options{
