@@ -12,8 +12,11 @@ import {
   NText,
 } from "naive-ui";
 import { onMounted, ref } from "vue";
+import { useI18n } from "vue-i18n";
 import processFast from "./sisyphus/proof-of-work";
 import processSlow from "./sisyphus/proof-of-work-slow";
+
+const { t } = useI18n();
 
 const props = defineProps<{
   title: string;
@@ -29,7 +32,7 @@ preferColorSchemeQuery.onchange = (e) => {
 };
 const useDarkTheme = ref(preferColorSchemeQuery.matches);
 const titleText = ref(props.title);
-const statusText = ref("Calculating...");
+const statusText = ref(t("common.calculating"));
 const progressVisible = ref(false);
 const progressValue = ref(0);
 const progressLabel = ref("0");
@@ -72,12 +75,12 @@ const u = (url: string, params: Record<string, string | number>) => {
 const dependencies = [
   {
     name: "WebCrypto",
-    msg: "Your browser doesn't have a functioning web.crypto element. Are you viewing this over a secure context?",
+    msg: t("dependencies.missingWebCrypto"),
     value: window.crypto,
   },
   {
     name: "Web Workers",
-    msg: "Your browser doesn't support web workers (sisyphus uses this to avoid freezing your browser). Do you have a plugin like JShelter installed?",
+    msg: t("dependencies.missingWebWorkers"),
     value: window.Worker,
   },
 ];
@@ -92,8 +95,8 @@ function ohNoes({ titleMsg, statusMsg }: OhNoesParams) {
 async function handleChallenge() {
   if (!window.isSecureContext) {
     ohNoes({
-      titleMsg: "Your context is not secure!",
-      statusMsg: `Try connecting over HTTPS or let the admin know to set up HTTPS. For more information, see <NA href="https://developer.mozilla.org/en-US/docs/Web/Security/Secure_Contexts#when_is_a_context_considered_secure">MDN</NA>.`,
+      titleMsg: t("errors.insecureContext"),
+      statusMsg: t("errors.insecureContextMessage"),
     });
     return;
   }
@@ -101,7 +104,7 @@ async function handleChallenge() {
   for (const { value, name, msg } of dependencies) {
     if (!value) {
       ohNoes({
-        titleMsg: `Missing feature ${name}`,
+        titleMsg: t("errors.missingFeature", { name }),
         statusMsg: msg,
       });
       return;
@@ -110,8 +113,8 @@ async function handleChallenge() {
 
   if (!props.challengeData) {
     ohNoes({
-      titleMsg: "Challenge error!",
-      statusMsg: `Failed to load challenge data. You may want to reload the page.`,
+      titleMsg: t("common.challengeError"),
+      statusMsg: t("errors.loadChallenge"),
     });
     return;
   }
@@ -120,8 +123,8 @@ async function handleChallenge() {
   const process = algorithms[rules.algorithm];
   if (!process) {
     ohNoes({
-      titleMsg: "Challenge error!",
-      statusMsg: `Failed to resolve check algorithm. You may want to reload the page.`,
+      titleMsg: t("common.challengeError"),
+      statusMsg: t("errors.resolveAlgorithm"),
     });
     return;
   }
@@ -149,16 +152,15 @@ async function handleChallenge() {
         progressValue.value = distance;
 
         if (probability < 0.1 && !showingApology) {
-          statusText.value +=
-            "\nVerification is taking longer than expected. Please do not refresh the page.";
+          statusText.value += "\n" + t("errors.longVerification");
           showingApology = true;
         }
       },
     );
     const t1 = Date.now();
 
-    titleText.value = "Success!";
-    statusText.value = `Done! Took ${t1 - t0}ms, ${nonce} iterations`;
+    titleText.value = t("common.success");
+    statusText.value = t("progress.completed", { time: t1 - t0, nonce });
     progressVisible.value = false;
     result.value = {
       hash,
@@ -170,8 +172,8 @@ async function handleChallenge() {
     setTimeout(submitResult, showModal.value ? 30000 : 250);
   } catch (error: any) {
     ohNoes({
-      titleMsg: "Calculation error!",
-      statusMsg: `Failed to calculate challenge: ${error?.message}`,
+      titleMsg: t("common.calculationError"),
+      statusMsg: t("errors.calculationFailed", { message: error?.message }),
     });
   }
 }
@@ -179,14 +181,14 @@ async function handleChallenge() {
 function submitResult() {
   const { hash, nonce, elapsedTime } = result.value;
   const redir = window.location.href;
-  window.location.replace(
-    u(`${props.basePrefix}/.within.website/x/cmd/sisyphus/api/pass-challenge`, {
-      response: hash,
-      nonce,
-      redir,
-      elapsedTime,
-    }),
-  );
+  // window.location.replace(
+  //   u(`${props.basePrefix}/.within.website/x/cmd/sisyphus/api/pass-challenge`, {
+  //     response: hash,
+  //     nonce,
+  //     redir,
+  //     elapsedTime,
+  //   }),
+  // );
 }
 
 function onDetailClicked() {
@@ -203,7 +205,7 @@ onMounted(() => {
     <NLayout content-class="min-h-screen flex flex-col">
       <div class="sisyphus-content">
         <NH1>{{ titleText }}</NH1>
-        <NText>{{ statusText }}</NText>
+        <NText v-html="statusText"></NText>
         <NProgress
           class="max-w-3xl"
           v-if="progressVisible"
@@ -212,76 +214,66 @@ onMounted(() => {
           :percentage="Math.round(progressValue)"
           indicator-placement="inside"
         />
-        <NText v-if="progressVisible">
-          Difficulty: {{ props.challengeData?.rules.report_as }}, Speed:
-          {{ progressLabel }}kH/s
+        <NText v-if="progressVisible"
+          >{{
+            $t("progress.difficulty", {
+              difficulty: props.challengeData?.rules.report_as,
+              speed: progressLabel,
+            })
+          }}
         </NText>
 
         <NModal v-model:show="showModal" preset="dialog">
           <template #header>
-            <NText>Why am i seeing this?</NText>
+            <NText>{{ $t("modal.title") }}</NText>
           </template>
-          <NP>
-            You are seeing this because the administrator of this website has
-            set up
-            <NA href="https://github.com/MooncellWiki/sisyphus">sisyphus</NA>
-            to protect the server against the scourge of
+          <i18n-t keypath="modal.paragraph1" :tag="NP">
+            <NA href="https://github.com/MooncellWiki/sisyphus">Sisyphus</NA>
             <NA
               href="https://thelibre.news/foss-infrastructure-is-under-attack-by-ai-companies/"
             >
-              AI companies aggressively scraping websites </NA
-            >. This can and does cause downtime for the websites, which makes
-            their resources inaccessible for everyone.
-          </NP>
-          <NP>
-            sisyphus is a compromise. sisyphus uses a
+              AI companies aggressively scraping websites
+            </NA>
+          </i18n-t>
+
+          <i18n-t keypath="modal.paragraph2" :tag="NP">
             <NA href="https://anubis.techaro.lol/docs/design/why-proof-of-work"
               >Proof-of-Work</NA
             >
-            scheme in the vein of
-            <NA href="https://en.wikipedia.org/wiki/Hashcash">Hashcash</NA>, a
-            proposed proof-of-work scheme for reducing email spam. The idea is
-            that at individual scales the additional load is ignorable, but at
-            mass scraper levels it adds up and makes scraping much more
-            expensive.
-          </NP>
-          <NP>
-            Ultimately, this is a hack whose real purpose is to give a "good
-            enough" placeholder solution so that more time can be spent on
-            fingerprinting and identifying headless browsers (EG: via how they
-            do font rendering) so that the challenge proof of work page doesn't
-            need to be presented to users that are much more likely to be
-            legitimate.
-          </NP>
-          <NP>
-            Please note that sisyphus requires the use of modern JavaScript
-            features that plugins like
-            <NA href="https://jshelter.org/">JShelter</NA> will disable. Please
-            disable JShelter or other such plugins for this domain.
-          </NP>
+            <NA href="https://en.wikipedia.org/wiki/Hashcash">Hashcash</NA>
+          </i18n-t>
+
+          <NP>{{ $t("modal.paragraph3") }}</NP>
+
+          <i18n-t keypath="modal.paragraph4" :tag="NP">
+            <NA href="https://jshelter.org/">JShelter</NA>
+          </i18n-t>
         </NModal>
-        <NA @click="onDetailClicked"> Why am I seeing this? </NA>
+        <NA @click="onDetailClicked">{{ $t("common.whySeeing") }}</NA>
         <div id="testarea"></div>
         <div
           v-if="showContinue"
           @click="submitResult"
           class="sisyphus-continue-btn"
         >
-          I've finished reading, continue →
+          {{ $t("common.continueReading") }}
         </div>
       </div>
 
       <NLayoutFooter bordered class="p-5">
         <div class="flex flex-col items-center justify-center">
-          <NText v-if="props.challengeData"
-            >Challenge: {{ props.challengeData?.challenge }}</NText
+          <NText v-if="props.challengeData">
+            {{
+              $t("common.challenge", {
+                challenge: props.challengeData?.challenge,
+              })
+            }}</NText
           >
-          <NText>
-            Protected by
+
+          <i18n-t keypath="common.protectedBy" :tag="NText">
             <NA href="https://github.com/MooncellWiki/sisyphus">Sisyphus</NA>
-            from
-            <NA href="https://project.mooncell.wiki">Mooncell Wiki</NA>.
-          </NText>
+            <NA href="https://project.mooncell.wiki">Mooncell Wiki</NA>
+          </i18n-t>
         </div>
       </NLayoutFooter>
     </NLayout>

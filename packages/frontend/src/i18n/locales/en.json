@@ -1,0 +1,36 @@
+{
+  "common": {
+    "calculating": "Calculating...",
+    "success": "Success!",
+    "challengeError": "Challenge error!",
+    "calculationError": "Calculation error!",
+    "whySeeing": "Why am I seeing this?",
+    "continueReading": "I've finished reading, continue →",
+    "challenge": "Challenge: {challenge}",
+    "protectedBy": "Protected by {0} from {1}."
+  },
+  "errors": {
+    "insecureContext": "Your context is not secure!",
+    "insecureContextMessage": "Try connecting over HTTPS or let the admin know to set up HTTPS. For more information, see {0}.",
+    "missingFeature": "Missing feature {name}",
+    "loadChallenge": "Failed to load challenge data. You may want to reload the page.",
+    "resolveAlgorithm": "Failed to resolve check algorithm. You may want to reload the page.",
+    "calculationFailed": "Failed to calculate challenge: {message}",
+    "longVerification": "Verification is taking longer than expected. Please do not refresh the page."
+  },
+  "progress": {
+    "completed": "Done! Took {time}ms, {nonce} iterations",
+    "difficulty": "Difficulty: {difficulty}, Speed: {speed}kH/s"
+  },
+  "dependencies": {
+    "missingWebCrypto": "Your browser doesn't have a functioning web.crypto element. Are you viewing this over a secure context?",
+    "missingWebWorkers": "Your browser doesn't support web workers (sisyphus uses this to avoid freezing your browser). Do you have a plugin like JShelter installed?"
+  },
+  "modal": {
+    "title": "Why am I seeing this?",
+    "paragraph1": "You are seeing this because the administrator of this website has set up {0} to protect the server against the scourge of {1}. This can and does cause downtime for the websites, which makes their resources inaccessible for everyone.",
+    "paragraph2": "sisyphus is a compromise. sisyphus uses a {0} scheme in the vein of {1}, a proposed proof-of-work scheme for reducing email spam. The idea is that at individual scales the additional load is ignorable, but at mass scraper levels it adds up and makes scraping much more expensive.",
+    "paragraph3": "Ultimately, this is a hack whose real purpose is to give a \"good enough\" placeholder solution so that more time can be spent on fingerprinting and identifying headless browsers (EG: via how they do font rendering) so that the challenge proof of work page doesn't need to be presented to users that are much more likely to be legitimate.",
+    "paragraph4": "Please note that sisyphus requires the use of modern JavaScript features that plugins like {0} will disable. Please disable JShelter or other such plugins for this domain."
+  }
+}

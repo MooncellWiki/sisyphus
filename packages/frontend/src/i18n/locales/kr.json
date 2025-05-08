@@ -1,0 +1,36 @@
+{
+  "common": {
+    "calculating": "계산 중...",
+    "success": "성공!",
+    "challengeError": "챌린지 오류!",
+    "calculationError": "계산 오류!",
+    "whySeeing": "왜 이 화면이 보이나요?",
+    "continueReading": "읽기를 마쳤습니다, 계속하기 →",
+    "challenge": "챌린지: {challenge}",
+    "protectedBy": "{0}에 의해 {1}로부터 보호됩니다."
+  },
+  "errors": {
+    "insecureContext": "보안되지 않은 컨텍스트입니다!",
+    "insecureContextMessage": "HTTPS를 통해 연결하거나 관리자에게 HTTPS를 설정하도록 요청하세요. 자세한 내용은 {0}을(를) 참조하세요.",
+    "missingFeature": "누락된 기능: {name}",
+    "loadChallenge": "챌린지 데이터를 로드하지 못했습니다. 페이지를 새로 고침하세요.",
+    "resolveAlgorithm": "검사 알고리즘을 해결하지 못했습니다. 페이지를 새로 고침하세요.",
+    "calculationFailed": "챌린지 계산에 실패했습니다: {message}",
+    "longVerification": "검증이 예상보다 오래 걸리고 있습니다. 페이지를 새로 고치지 마세요."
+  },
+  "progress": {
+    "completed": "완료! {time}ms 소요, {nonce}회 반복",
+    "difficulty": "난이도: {difficulty}, 속도: {speed}kH/s"
+  },
+  "dependencies": {
+    "missingWebCrypto": "브라우저에 작동하는 web.crypto 요소가 없습니다. 안전한 컨텍스트에서 보고 있습니까?",
+    "missingWebWorkers": "브라우저가 웹 워커를 지원하지 않습니다(sisyphus는 브라우저가 멈추는 것을 방지하기 위해 이를 사용합니다). JShelter와 같은 플러그인이 설치되어 있습니까?"
+  },
+  "modal": {
+    "title": "왜 이 화면이 보이나요?",
+    "paragraph1": "이 웹사이트의 관리자가 {0}을(를) 설정하여 {1}의 위협으로부터 서버를 보호했기 때문에 이 화면이 표시됩니다. 이는 웹사이트의 다운타임을 유발할 수 있으며, 모든 사용자가 리소스에 접근할 수 없게 만들 수 있습니다.",
+    "paragraph2": "sisyphus는 타협안입니다. sisyphus는 {0} 스킴을 사용하며, {1}와 같은 이메일 스팸 감소를 위한 작업 증명 스킴 제안과 유사합니다. 이 아이디어는 개별 규모에서는 추가 부하가 무시할 수 있는 수준이지만, 대규모 스크래핑에서는 부하가 증가하여 스크래핑 비용이 훨씬 더 비싸진다는 것입니다.",
+    "paragraph3": "궁극적으로, 이것은 \"충분히 좋은\" 임시 솔루션을 제공하기 위한 해킹으로, 폰트 렌더링 방식과 같은 방법으로 헤드리스 브라우저를 식별하고 지문을 채취하는 데 더 많은 시간을 할애할 수 있도록 하는 것이 목적입니다. 따라서 작업 증명 페이지를 합법적인 사용자에게 표시할 필요가 줄어듭니다.",
+    "paragraph4": "sisyphus는 {0}과 같은 플러그인이 비활성화하는 최신 JavaScript 기능의 사용을 요구한다는 점에 유의하세요. 이 도메인에서는 JShelter 또는 기타 유사한 플러그인을 비활성화하세요."
+  }
+}
