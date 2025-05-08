@@ -181,14 +181,14 @@ async function handleChallenge() {
 function submitResult() {
   const { hash, nonce, elapsedTime } = result.value;
   const redir = window.location.href;
-  // window.location.replace(
-  //   u(`${props.basePrefix}/.within.website/x/cmd/sisyphus/api/pass-challenge`, {
-  //     response: hash,
-  //     nonce,
-  //     redir,
-  //     elapsedTime,
-  //   }),
-  // );
+  window.location.replace(
+    u(`${props.basePrefix}/.within.website/x/cmd/sisyphus/api/pass-challenge`, {
+      response: hash,
+      nonce,
+      redir,
+      elapsedTime,
+    }),
+  );
 }
 
 function onDetailClicked() {
