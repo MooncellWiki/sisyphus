@@ -232,21 +232,24 @@ onMounted(() => {
             <NA
               href="https://thelibre.news/foss-infrastructure-is-under-attack-by-ai-companies/"
             >
-              AI companies aggressively scraping websites
+            {{ $t("modal.scrapingWebsite") }}</NA
             </NA>
           </i18n-t>
 
           <i18n-t keypath="modal.paragraph2" :tag="NP">
             <NA href="https://anubis.techaro.lol/docs/design/why-proof-of-work"
-              >Proof-of-Work</NA
+              >{{ $t('modal.proofOfWork') }}</NA
             >
             <NA href="https://en.wikipedia.org/wiki/Hashcash">Hashcash</NA>
           </i18n-t>
 
-          <NP>{{ $t("modal.paragraph3") }}</NP>
+          <i18n-t keypath="modal.paragraph3" :tag="NP">
+            <NA href="https://github.com/MooncellWiki/sisyphus">{{ $t('modal.githubRepo') }}</NA>
+          </i18n-t>
 
           <i18n-t keypath="modal.paragraph4" :tag="NP">
             <NA href="https://jshelter.org/">JShelter</NA>
+            <NA href="https://f.kdocs.cn/ksform/w/write/YyLpQg1a">{{ $t('modal.feedbackLink') }}</NA>
           </i18n-t>
         </NModal>
         <NA @click="onDetailClicked">{{ $t("common.whySeeing") }}</NA>

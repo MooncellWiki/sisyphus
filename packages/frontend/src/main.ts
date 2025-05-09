@@ -7,7 +7,7 @@ import "./styles/main.css";
 import App from "./App.vue";
 import en from "./i18n/locales/en.json";
 import ja from "./i18n/locales/ja.json";
-import kr from "./i18n/locales/kr.json";
+import ko from "./i18n/locales/ko.json";
 import zhCN from "./i18n/locales/zh-cn.json";
 import zhTW from "./i18n/locales/zh-tw.json";
 
@@ -38,7 +38,7 @@ const i18n = createI18n({
   messages: {
     en,
     ja,
-    kr,
+    ko,
     zhCN,
     zhTW,
   },

@@ -24,13 +24,17 @@
   },
   "dependencies": {
     "missingWebCrypto": "Your browser doesn't have a functioning web.crypto element. Are you viewing this over a secure context?",
-    "missingWebWorkers": "Your browser doesn't support web workers (sisyphus uses this to avoid freezing your browser). Do you have a plugin like JShelter installed?"
+    "missingWebWorkers": "Your browser doesn't support web workers (Sisyphus uses this to avoid freezing your browser). Do you have a plugin like JShelter installed?"
   },
   "modal": {
     "title": "Why am I seeing this?",
-    "paragraph1": "You are seeing this because the administrator of this website has set up {0} to protect the server against the scourge of {1}. This can and does cause downtime for the websites, which makes their resources inaccessible for everyone.",
-    "paragraph2": "sisyphus is a compromise. sisyphus uses a {0} scheme in the vein of {1}, a proposed proof-of-work scheme for reducing email spam. The idea is that at individual scales the additional load is ignorable, but at mass scraper levels it adds up and makes scraping much more expensive.",
-    "paragraph3": "Ultimately, this is a hack whose real purpose is to give a \"good enough\" placeholder solution so that more time can be spent on fingerprinting and identifying headless browsers (EG: via how they do font rendering) so that the challenge proof of work page doesn't need to be presented to users that are much more likely to be legitimate.",
-    "paragraph4": "Please note that sisyphus requires the use of modern JavaScript features that plugins like {0} will disable. Please disable JShelter or other such plugins for this domain."
+    "paragraph1": "You are seeing this because the administrator of this website has set up {0} to protect the server against the scourge of {1}, which can cause downtime for websites and make their resources inaccessible for everyone.",
+    "scrapingWebsite": "unrestricted scraping of website content by AI companies",
+    "paragraph2": "Sisyphus uses a {0} scheme similar to {1}, a proof-of-work system commonly used to reduce email spam. The idea is that the additional load is negligible for individual users but adds up significantly for large-scale scrapers, making scraping much more expensive.",
+    "proofOfWork": "proof-of-work mechanism",
+    "paragraph3": "We assure you that this feature is not intended to hinder anything other than large-scale scraping. You can visit {0} to learn more. In the future, we may adopt more user-friendly technologies to achieve similar effects.",
+    "paragraph4": "Please note that Sisyphus requires modern JavaScript features that plugins like {0} may disable. Please disable JShelter or similar plugins for this domain. If you still cannot browse the website after disabling them, please visit {1} to let us know.",
+    "feedbackLink": "this link",
+    "githubRepo": "GitHub repository"
   }
 }
