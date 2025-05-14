@@ -20,6 +20,7 @@ templ injected(challenge any) {
 		@templ.JSONScript("sisyphus_challenge", challenge)
 	}
 	@templ.JSONScript("sisyphus_base_prefix", sisyphus.BasePrefix)
+	@templ.JSONScript("sisyphus_help_link", sisyphus.HelpLink)
 }
 
 templ base(title string, challenge any, ogTags map[string]string) {
@@ -39,7 +40,7 @@ templ base(title string, challenge any, ogTags map[string]string) {
 	})
 }
 
-templ errorPage(message string, mail string) {
+templ errorPage(message string, mail string, helpLink string) {
 	<html>
 		<head><title>Oh noes!</title></head>
 		<body>
@@ -49,8 +50,8 @@ templ errorPage(message string, mail string) {
 				if mail != "" {
 					<p>
 						<a href="/">Go home</a> or if you believe you should not be blocked, please contact the webmaster at
-						<a href={ "mailto:" + templ.SafeURL(mail) }>
-							{ mail }
+						<a href={ templ.SafeURL(helpLink) }>
+							{ helpLink }
 						</a>
 					</p>
 				} else {

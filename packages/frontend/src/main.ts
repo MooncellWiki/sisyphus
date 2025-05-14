@@ -48,6 +48,7 @@ const app = createApp(App, {
   title: document.querySelector("title")?.textContent,
   basePrefix: parseData("#sisyphus_base_prefix"),
   challengeData: parseData("#sisyphus_challenge"),
+  helpLink: parseData("#sisyphus_help_link"),
 });
 app.use(i18n);
 app.mount("#app");

@@ -19,6 +19,9 @@ const CookieDefaultExpirationTime = 7 * 24 * time.Hour
 // BasePrefix is a global prefix for all sisyphus endpoints. Can be emptied to remove the prefix entirely.
 var BasePrefix = ""
 
+// HelpLink is the URL to the help page for sisyphus.
+var HelpLink = ""
+
 // StaticPath is the location where all static sisyphus assets are located.
 const StaticPath = "/.within.website/x/cmd/sisyphus/"
 

@@ -40,6 +40,7 @@ type Options struct {
 
 	WebmasterEmail string
 	BasePrefix     string
+	HelpLink       string
 }
 
 func LoadPoliciesOrDefault(fname string, defaultDifficulty int) (*policy.ParsedConfig, error) {
@@ -82,6 +83,7 @@ func New(opts Options) (*Server, error) {
 	}
 
 	sisyphus.BasePrefix = opts.BasePrefix
+	sisyphus.HelpLink = opts.HelpLink
 
 	result := &Server{
 		next:       opts.Next,

@@ -22,6 +22,7 @@ const props = defineProps<{
   title: string;
   basePrefix: string | null;
   challengeData: ChallengeData | null;
+  helpLink: string | null;
 }>();
 
 const preferColorSchemeQuery = window.matchMedia(
@@ -249,7 +250,7 @@ onMounted(() => {
 
           <i18n-t keypath="modal.paragraph4" :tag="NP">
             <NA href="https://jshelter.org/">JShelter</NA>
-            <NA href="https://f.kdocs.cn/ksform/w/write/YyLpQg1a">{{ $t('modal.feedbackLink') }}</NA>
+            <NA :href="helpLink">{{ $t('modal.feedbackLink') }}</NA>
           </i18n-t>
         </NModal>
         <NA @click="onDetailClicked">{{ $t("common.whySeeing") }}</NA>

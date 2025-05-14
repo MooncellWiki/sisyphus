@@ -24,8 +24,8 @@ func Index() templ.Component {
 	return nil
 }
 
-func ErrorPage(msg string, mail string) templ.Component {
-	return errorPage(msg, mail)
+func ErrorPage(msg string, mail string, helpLink string) templ.Component {
+	return errorPage(msg, mail, helpLink)
 }
 
 func Bench() templ.Component {
