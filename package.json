@@ -1,7 +1,7 @@
 {
   "name": "@mooncellwiki/sisyphus",
   "version": "0.0.0",
-  "packageManager": "pnpm@10.33.0",
+  "packageManager": "pnpm@12.9.1",
   "type": "module",
   "scripts": {
     "test": "pnpm run assets && go test ./...",
@@ -18,12 +18,12 @@
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@unocss/eslint-config": "66.6.8",
-    "eslint": "^10.2.0",
+    "eslint": "^10.12.0",
     "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-import-x": "^4.16.2",
-    "eslint-plugin-prettier": "^5.5.5",
+    "eslint-plugin-import-x": "^4.17.1",
+    "eslint-plugin-prettier": "^5.5.6",
     "eslint-plugin-unicorn": "^64.0.0",
-    "globals": "^17.5.0",
-    "typescript-eslint": "^8.58.2"
+    "globals": "^17.13.0",
+    "typescript-eslint": "^8.71.1"
   }
 }
